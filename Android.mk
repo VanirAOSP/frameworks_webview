@@ -23,9 +23,6 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := webview
 LOCAL_MODULE_TAGS := optional
 LOCAL_REQUIRED_MODULES := webviewchromium
-ifeq ($(TARGET_IS_AN_ANTIQUE),TRUE)
-LOCAL_REQUIRED_MODULES += libwebcore
-endif
 
 include $(BUILD_PHONY_PACKAGE)
 
