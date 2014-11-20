@@ -32,7 +32,6 @@ import android.net.http.SslCertificate;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.Handler;
 import android.os.Message;
 import android.print.PrintDocumentAdapter;
 import android.text.TextUtils;
@@ -72,7 +71,6 @@ import org.chromium.android_webview.AwSettings;
 import org.chromium.android_webview.AwPrintDocumentAdapter;
 import org.chromium.base.ThreadUtils;
 import org.chromium.content.browser.LoadUrlParams;
-import org.chromium.content.browser.SmartClipProvider;
 import org.chromium.net.NetworkChangeNotifier;
 
 import java.io.BufferedWriter;
@@ -95,7 +93,7 @@ import java.util.Queue;
  * and a small set of no-op deprecated APIs.
  */
 class WebViewChromium implements WebViewProvider,
-          WebViewProvider.ScrollDelegate, WebViewProvider.ViewDelegate, SmartClipProvider {
+          WebViewProvider.ScrollDelegate, WebViewProvider.ViewDelegate {
 
     private class WebViewChromiumRunQueue {
         public WebViewChromiumRunQueue() {
@@ -2248,19 +2246,4 @@ class WebViewChromium implements WebViewProvider,
             return mWebViewPrivate.super_onHoverEvent(event);
         }
     }
-
-    // Implements SmartClipProvider
-    @Override
-    public void extractSmartClipData(int x, int y, int width, int height) {
-        checkThread();
-        mAwContents.extractSmartClipData(x, y, width, height);
-    }
-
-    // Implements SmartClipProvider
-    @Override
-    public void setSmartClipResultHandler(final Handler resultHandler) {
-        checkThread();
-        mAwContents.setSmartClipResultHandler(resultHandler);
-    }
-
 }
